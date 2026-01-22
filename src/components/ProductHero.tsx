@@ -74,19 +74,7 @@ export function ProductHero({
         transition={{ duration: 0.4, delay: 0.2 }}
         className="space-y-3"
       >
-        {/* Primary CTA - Installation */}
-        <Button
-          onClick={onOrderInstallation}
-          className="w-full h-14 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth justify-between px-5"
-        >
-          <span className="flex items-center gap-3">
-            <Wrench className="w-5 h-5" />
-            <span className="uppercase tracking-wide text-sm">Заказать установку</span>
-          </span>
-          <ChevronRight className="w-5 h-5" />
-        </Button>
-
-        {/* Secondary CTA - Warranty */}
+        {/* Warranty CTA */}
         {isWarrantyRegistered ? (
           <div className="bg-surface rounded-lg p-4 border border-stroke">
             <div className="flex items-center gap-3">
@@ -104,17 +92,27 @@ export function ProductHero({
             </div>
           </div>
         ) : (
-          <Button
+          <button
             onClick={onRegisterWarranty}
-            variant="outline"
-            className="w-full h-14 bg-surface border-stroke hover:bg-accent text-foreground font-medium rounded-lg transition-smooth justify-between px-5"
+            className="w-full bg-surface border border-stroke hover:bg-accent rounded-lg transition-smooth p-4 text-left"
           >
-            <span className="flex items-center gap-3">
-              <Shield className="w-5 h-5" />
-              <span className="uppercase tracking-wide text-sm">Зарегистрировать гарантию</span>
-            </span>
-            <ChevronRight className="w-5 h-5" />
-          </Button>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide">
+                    Зарегистрировать гарантию
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    +1 год дополнительно. Бесплатно. Всего 20 секунд.
+                  </p>
+                </div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground" />
+            </div>
+          </button>
         )}
 
         {/* Secondary Actions - Two columns */}
