@@ -7,8 +7,6 @@ import { ProductHero } from "@/components/ProductHero";
 import { WarrantyForm } from "@/components/WarrantyForm";
 import { InstallationForm } from "@/components/InstallationForm";
 import { ServiceBlock } from "@/components/ServiceBlock";
-import { ErrorState } from "@/components/ErrorState";
-import ovenImage from "@/assets/hf-608-b-01.png";
 
 // Simulated QR data (in real app, would come from URL params)
 const MOCK_QR_DATA = {
@@ -25,7 +23,6 @@ const getStoredWarranty = (serialNumber: string) => {
 
 const saveWarranty = (serialNumber: string, data: { purchaseDate: string; name: string; phone: string }) => {
   const endDate = new Date(data.purchaseDate);
-  // 2 года стандартная + 1 год дополнительно = 3 года всего
   endDate.setFullYear(endDate.getFullYear() + 3);
   
   const warrantyData = {
@@ -48,7 +45,6 @@ const Index = () => {
     name: string;
   } | null>(null);
 
-  // Check for stored city on mount
   useEffect(() => {
     const storedCity = localStorage.getItem("kuppersberg_city");
     if (storedCity) {
@@ -57,7 +53,6 @@ const Index = () => {
     }
   }, []);
 
-  // Check for warranty status
   useEffect(() => {
     if (MOCK_QR_DATA.isValid) {
       const stored = getStoredWarranty(MOCK_QR_DATA.serialNumber);
@@ -100,21 +95,6 @@ const Index = () => {
     toast.info("Загрузка инструкции...");
   };
 
-  const handleContactSupport = () => {
-    window.open("https://t.me/kuppersberg_support", "_blank");
-  };
-
-  // Error state
-  if (!MOCK_QR_DATA.isValid) {
-    return (
-      <ErrorState 
-        onContactSupport={handleContactSupport} 
-        city={city || undefined}
-        onChangeCity={city ? handleChangeCity : undefined}
-      />
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background">
       {/* City Selection Modal */}
@@ -155,10 +135,10 @@ const Index = () => {
               <ProductHero
                 model={MOCK_QR_DATA.model}
                 serialNumber={MOCK_QR_DATA.serialNumber}
-                imageUrl={ovenImage}
+                onOrderInstallation={() => setShowInstallationForm(true)}
                 onRegisterWarranty={() => setShowWarrantyForm(true)}
                 onDownloadManual={handleDownloadManual}
-                warrantyRegistered={!!warrantyData}
+                isWarrantyRegistered={!!warrantyData}
                 warrantyEndDate={warrantyData?.endDate}
               />
 

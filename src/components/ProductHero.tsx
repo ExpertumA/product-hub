@@ -1,26 +1,27 @@
 import { motion } from "framer-motion";
-import { FileText, Shield, CheckCircle, Ruler } from "lucide-react";
+import { Shield, Wrench, ChevronRight, BadgeCheck, FileText, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { InstallationDiagram } from "./InstallationDiagram";
+import ovenImage from "@/assets/hf-608-b-01.png";
 
 interface ProductHeroProps {
   model: string;
   serialNumber: string;
-  imageUrl: string;
+  onOrderInstallation: () => void;
   onRegisterWarranty: () => void;
   onDownloadManual: () => void;
-  warrantyRegistered: boolean;
+  isWarrantyRegistered?: boolean;
   warrantyEndDate?: string;
 }
 
 export function ProductHero({
   model,
   serialNumber,
-  imageUrl,
+  onOrderInstallation,
   onRegisterWarranty,
   onDownloadManual,
-  warrantyRegistered,
+  isWarrantyRegistered = false,
   warrantyEndDate,
 }: ProductHeroProps) {
   const [showDiagram, setShowDiagram] = useState(false);
@@ -43,32 +44,24 @@ export function ProductHero({
         </p>
       </motion.div>
 
-      {/* Product Image */}
+      {/* Product Image with Badge */}
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="relative mb-4"
+        className="relative mb-6"
       >
         <div className="aspect-square rounded-lg bg-surface p-6 flex items-center justify-center">
           <img
-            src={imageUrl}
+            src={ovenImage}
             alt={model}
             className="w-full h-full object-contain"
           />
         </div>
-      </motion.div>
-
-      {/* Original Product Badge - Below image, left aligned */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.15 }}
-        className="mb-6"
-      >
-        <div className="inline-flex items-center gap-2 bg-success/10 border border-success/30 px-3 py-2 rounded-md">
-          <CheckCircle className="w-4 h-4 text-success" />
-          <span className="text-xs font-medium text-success uppercase tracking-wider">
+        {/* Original Product Badge - bottom left, white, small */}
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-white px-2 py-1 rounded">
+          <BadgeCheck className="w-3 h-3 text-black" />
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-black">
             Оригинальный товар
           </span>
         </div>
@@ -81,15 +74,27 @@ export function ProductHero({
         transition={{ duration: 0.4, delay: 0.2 }}
         className="space-y-3"
       >
-        {/* Primary CTA - Warranty */}
-        {warrantyRegistered ? (
-          <div className="bg-surface rounded-lg p-4 border border-success/30">
+        {/* Primary CTA - Installation */}
+        <Button
+          onClick={onOrderInstallation}
+          className="w-full h-14 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth justify-between px-5"
+        >
+          <span className="flex items-center gap-3">
+            <Wrench className="w-5 h-5" />
+            <span className="uppercase tracking-wide text-sm">Заказать установку</span>
+          </span>
+          <ChevronRight className="w-5 h-5" />
+        </Button>
+
+        {/* Secondary CTA - Warranty */}
+        {isWarrantyRegistered ? (
+          <div className="bg-surface rounded-lg p-4 border border-stroke">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-md bg-success/20 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-success" />
+              <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
+                <Shield className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-success uppercase tracking-wide">
+                <p className="text-sm font-semibold uppercase tracking-wide">
                   Гарантия активна
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -99,20 +104,17 @@ export function ProductHero({
             </div>
           </div>
         ) : (
-          <div className="space-y-2">
-            <Button
-              onClick={onRegisterWarranty}
-              className="w-full h-12 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth"
-            >
-              <Shield className="w-4 h-4 mr-2" />
-              <span className="uppercase tracking-wide text-sm">
-                Зарегистрировать гарантию
-              </span>
-            </Button>
-            <p className="text-center text-xs text-muted-foreground">
-              +1 год дополнительной гарантии бесплатно
-            </p>
-          </div>
+          <Button
+            onClick={onRegisterWarranty}
+            variant="outline"
+            className="w-full h-14 bg-surface border-stroke hover:bg-accent text-foreground font-medium rounded-lg transition-smooth justify-between px-5"
+          >
+            <span className="flex items-center gap-3">
+              <Shield className="w-5 h-5" />
+              <span className="uppercase tracking-wide text-sm">Зарегистрировать гарантию</span>
+            </span>
+            <ChevronRight className="w-5 h-5" />
+          </Button>
         )}
 
         {/* Secondary Actions - Two columns */}
