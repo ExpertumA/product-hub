@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AlertTriangle, Send, MapPin, Phone, MessageCircle, Star } from "lucide-react";
+import { AlertTriangle, Send, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "./Header";
 
@@ -30,8 +30,8 @@ export function ErrorState({ onContactSupport, city, onChangeCity }: ErrorStateP
           className="py-8"
         >
           <div className="bg-surface rounded-lg p-6 border border-stroke text-center">
-            <div className="w-14 h-14 rounded-xl bg-destructive/10 flex items-center justify-center mx-auto mb-5">
-              <AlertTriangle className="w-7 h-7 text-destructive" />
+            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+              <AlertTriangle className="w-7 h-7 text-primary" />
             </div>
             <h1 className="text-lg font-bold uppercase tracking-wide mb-3">
               Устройство не найдено
@@ -86,29 +86,6 @@ export function ErrorState({ onContactSupport, city, onChangeCity }: ErrorStateP
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Support Actions */}
-          <div className="grid grid-cols-2 gap-3">
-            <button 
-              onClick={onContactSupport}
-              className="flex flex-col items-center gap-2 p-4 rounded-lg bg-surface border border-stroke hover:bg-accent transition-smooth group"
-            >
-              <div className="w-10 h-10 rounded-md bg-background flex items-center justify-center group-hover:bg-primary/10 transition-smooth">
-                <MessageCircle className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-smooth" />
-              </div>
-              <span className="text-xs uppercase tracking-wide text-muted-foreground group-hover:text-foreground transition-smooth">
-                Связаться
-              </span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 rounded-lg bg-surface border border-stroke hover:bg-accent transition-smooth group">
-              <div className="w-10 h-10 rounded-md bg-background flex items-center justify-center group-hover:bg-warning/10 transition-smooth">
-                <Star className="w-5 h-5 text-muted-foreground group-hover:text-warning transition-smooth" />
-              </div>
-              <span className="text-xs uppercase tracking-wide text-muted-foreground group-hover:text-foreground transition-smooth">
-                Оставить отзыв
-              </span>
-            </button>
           </div>
         </motion.section>
 
