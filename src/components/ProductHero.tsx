@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, Shield, CheckCircle, Ruler, ShoppingCart } from "lucide-react";
+import { FileText, Shield, CheckCircle, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { InstallationDiagram } from "./InstallationDiagram";
@@ -27,7 +27,7 @@ export function ProductHero({
 
   return (
     <section className="py-6">
-      {/* Product Title Section - Reference style */}
+      {/* Product Title Section */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -43,23 +43,13 @@ export function ProductHero({
         </p>
       </motion.div>
 
-      {/* Product Image with Badge */}
+      {/* Product Image */}
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="relative mb-6"
+        className="relative mb-4"
       >
-        {/* Original Product Badge */}
-        <div className="absolute top-3 left-3 z-10">
-          <div className="flex items-center gap-1.5 bg-success px-3 py-1.5 rounded-md">
-            <CheckCircle className="w-3.5 h-3.5 text-white" />
-            <span className="text-[11px] font-semibold text-white uppercase tracking-wider">
-              Оригинальный товар
-            </span>
-          </div>
-        </div>
-
         <div className="aspect-square rounded-lg bg-surface p-6 flex items-center justify-center">
           <img
             src={imageUrl}
@@ -69,7 +59,22 @@ export function ProductHero({
         </div>
       </motion.div>
 
-      {/* CTA Buttons - Reference style */}
+      {/* Original Product Badge - Below image, left aligned */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, delay: 0.15 }}
+        className="mb-6"
+      >
+        <div className="inline-flex items-center gap-2 bg-success/10 border border-success/30 px-3 py-2 rounded-md">
+          <CheckCircle className="w-4 h-4 text-success" />
+          <span className="text-xs font-medium text-success uppercase tracking-wider">
+            Оригинальный товар
+          </span>
+        </div>
+      </motion.div>
+
+      {/* CTA Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -99,7 +104,7 @@ export function ProductHero({
               onClick={onRegisterWarranty}
               className="w-full h-12 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth"
             >
-              <ShoppingCart className="w-4 h-4 mr-2" />
+              <Shield className="w-4 h-4 mr-2" />
               <span className="uppercase tracking-wide text-sm">
                 Зарегистрировать гарантию
               </span>

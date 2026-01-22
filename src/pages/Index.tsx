@@ -6,7 +6,6 @@ import { CitySelectModal } from "@/components/CitySelectModal";
 import { ProductHero } from "@/components/ProductHero";
 import { WarrantyForm } from "@/components/WarrantyForm";
 import { InstallationForm } from "@/components/InstallationForm";
-import { PromoBanner } from "@/components/PromoBanner";
 import { ServiceBlock } from "@/components/ServiceBlock";
 import { ErrorState } from "@/components/ErrorState";
 import ovenImage from "@/assets/hf-608-b-01.png";
@@ -107,7 +106,13 @@ const Index = () => {
 
   // Error state
   if (!MOCK_QR_DATA.isValid) {
-    return <ErrorState onContactSupport={handleContactSupport} />;
+    return (
+      <ErrorState 
+        onContactSupport={handleContactSupport} 
+        city={city || undefined}
+        onChangeCity={city ? handleChangeCity : undefined}
+      />
+    );
   }
 
   return (
@@ -156,8 +161,6 @@ const Index = () => {
                 warrantyRegistered={!!warrantyData}
                 warrantyEndDate={warrantyData?.endDate}
               />
-
-              <PromoBanner />
 
               <ServiceBlock
                 city={city}

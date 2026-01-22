@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Phone, MessageCircle, Star, Wrench, Zap, CircleDot } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Star, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ServiceBlockProps {
@@ -17,24 +17,6 @@ const SERVICE_CENTERS: Record<string, { name: string; address: string; phone: st
   ],
 };
 
-const FEATURES = [
-  {
-    icon: Wrench,
-    title: "УСТАНОВИМ",
-    description: "БЕСПЛАТНО В МОСКВЕ И СПБ",
-  },
-  {
-    icon: Zap,
-    title: "БЫСТРО ДОСТАВИМ",
-    description: "БЕСПЛАТНО ПО РФ, ДО 5 ДНЕЙ",
-  },
-  {
-    icon: CircleDot,
-    title: "ГАРАНТИЯ 2+1",
-    description: "ПО ЛУЧШИМ СТАНДАРТАМ РФ",
-  },
-];
-
 export function ServiceBlock({ city, onOrderInstallation }: ServiceBlockProps) {
   const centers = SERVICE_CENTERS[city] || [
     { name: "Центральный сервис", address: "Центральная ул., 1", phone: "+7 (800) 123-45-67" },
@@ -47,32 +29,11 @@ export function ServiceBlock({ city, onOrderInstallation }: ServiceBlockProps) {
       transition={{ duration: 0.4, delay: 0.3 }}
       className="py-8"
     >
-      {/* Feature Cards - Reference style grid */}
-      <div className="grid grid-cols-3 gap-3 mb-8">
-        {FEATURES.map((feature, index) => (
-          <motion.div
-            key={feature.title}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 + index * 0.1 }}
-            className="bg-surface rounded-lg p-4 border border-stroke"
-          >
-            <feature.icon className="w-5 h-5 text-primary mb-3" />
-            <p className="text-[11px] font-bold uppercase tracking-wide text-foreground mb-1">
-              {feature.title}
-            </p>
-            <p className="text-[10px] uppercase tracking-wide text-muted-foreground leading-tight">
-              {feature.description}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-
       {/* Installation CTA */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.4 }}
         className="mb-8"
       >
         <div className="bg-surface rounded-lg p-4 border border-stroke">
@@ -100,7 +61,7 @@ export function ServiceBlock({ city, onOrderInstallation }: ServiceBlockProps) {
       <motion.h2
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.5 }}
         className="text-lg font-bold uppercase tracking-wide mb-4"
       >
         Сервис и поддержка
@@ -110,7 +71,7 @@ export function ServiceBlock({ city, onOrderInstallation }: ServiceBlockProps) {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
+        transition={{ delay: 0.6 }}
         className="mb-6"
       >
         <p className="label-style mb-3 flex items-center gap-2">
@@ -142,7 +103,7 @@ export function ServiceBlock({ city, onOrderInstallation }: ServiceBlockProps) {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
+        transition={{ delay: 0.7 }}
         className="grid grid-cols-2 gap-3"
       >
         <button className="flex flex-col items-center gap-2 p-4 rounded-lg bg-surface border border-stroke hover:bg-accent transition-smooth group">
