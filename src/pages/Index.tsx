@@ -49,7 +49,7 @@ const Index = () => {
     name: string;
   } | null>(null);
 
-  // Check for stored city on mount (for demo, default to showing city picker)
+  // Check for stored city on mount
   useEffect(() => {
     const storedCity = localStorage.getItem("kuppersberg_city");
     if (storedCity) {
@@ -94,12 +94,11 @@ const Index = () => {
 
   const handleInstallationSubmit = (data: { address: string; date: string }) => {
     setShowInstallationForm(false);
-    toast.success("Заявка на установку оформлена! Мы свяжемся с вами.");
+    toast.success("Заявка на установку оформлена!");
   };
 
   const handleDownloadManual = () => {
     toast.info("Загрузка инструкции...");
-    // In real app, would trigger download
   };
 
   const handleContactSupport = () => {
@@ -137,7 +136,7 @@ const Index = () => {
         model={MOCK_QR_DATA.model}
       />
 
-      {/* Main Content - only shown after city is selected */}
+      {/* Main Content */}
       <AnimatePresence>
         {city && !showCityModal && (
           <motion.div
@@ -169,7 +168,7 @@ const Index = () => {
             {/* Footer */}
             <footer className="border-t border-divider py-6">
               <div className="max-w-md mx-auto px-4 text-center">
-                <p className="font-display text-primary text-sm tracking-widest mb-2">
+                <p className="text-primary text-xs font-bold tracking-widest uppercase mb-2">
                   KUPPERSBERG
                 </p>
                 <p className="text-xs text-muted-foreground">

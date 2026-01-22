@@ -21,25 +21,25 @@ export function InstallationDiagram({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(17,17,17,0.95)] backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
           onClick={onClose}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 10 }}
+            initial={{ opacity: 0, scale: 0.98, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 10 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="w-full max-w-lg glass-surface rounded-xl border border-stroke shadow-deep overflow-hidden"
+            exit={{ opacity: 0, scale: 0.98, y: 8 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="w-full max-w-lg bg-surface rounded-lg border border-stroke shadow-deep overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-divider">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
                   <ZoomIn className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h2 className="font-display text-lg font-semibold">
+                  <h2 className="text-base font-bold uppercase tracking-wide">
                     Схема встраивания
                   </h2>
                   <p className="text-xs text-muted-foreground">{model}</p>
@@ -47,7 +47,7 @@ export function InstallationDiagram({
               </div>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-accent transition-smooth"
+                className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-accent transition-smooth"
               >
                 <X className="w-4 h-4 text-muted-foreground" />
               </button>
@@ -55,7 +55,7 @@ export function InstallationDiagram({
 
             {/* Diagram Image */}
             <div className="p-4">
-              <div className="rounded-xl overflow-hidden bg-white">
+              <div className="rounded-md overflow-hidden bg-white">
                 <img
                   src={diagramImage}
                   alt={`Схема встраивания ${model}`}
@@ -68,17 +68,16 @@ export function InstallationDiagram({
             <div className="px-5 pb-5">
               <Button
                 onClick={() => {
-                  // In real app, would trigger download
                   const link = document.createElement("a");
                   link.href = diagramImage;
                   link.download = `schema-${model.replace(/\s+/g, "-")}.jpg`;
                   link.click();
                 }}
                 variant="outline"
-                className="w-full h-12 bg-surface hover:bg-accent text-foreground rounded-xl transition-smooth uppercase tracking-wide font-medium text-sm"
+                className="w-full h-12 bg-surface hover:bg-accent border-stroke text-foreground rounded-lg transition-smooth"
               >
                 <Download className="w-4 h-4 mr-2" />
-                Скачать схему
+                <span className="uppercase tracking-wide text-sm">Скачать схему</span>
               </Button>
             </div>
           </motion.div>

@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export function Header({ city, onChangeCity }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 glass-surface border-b border-divider">
+    <header className="sticky top-0 z-40 bg-background border-b border-divider">
       <div className="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
@@ -25,7 +25,7 @@ export function Header({ city, onChangeCity }: HeaderProps) {
           className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-smooth"
         >
           <MapPin className="w-4 h-4" />
-          <span>{city}</span>
+          <span className="uppercase tracking-wide text-xs font-medium">{city}</span>
           <ChevronDown className="w-3 h-3" />
         </button>
       </div>

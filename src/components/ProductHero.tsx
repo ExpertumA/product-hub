@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, Shield, CheckCircle, Ruler } from "lucide-react";
+import { FileText, Shield, CheckCircle, Ruler, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { InstallationDiagram } from "./InstallationDiagram";
@@ -27,39 +27,40 @@ export function ProductHero({
 
   return (
     <section className="py-6">
+      {/* Product Title Section - Reference style */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-6"
+        transition={{ duration: 0.4 }}
+        className="mb-6"
       >
-        <p className="text-muted-foreground mb-2 text-sm">Добро пожаловать!</p>
-        <h1 className="font-display text-2xl md:text-3xl font-semibold mb-1">
+        <p className="label-style mb-3">ДУХОВОЙ ШКАФ</p>
+        <h1 className="text-2xl font-bold tracking-tight mb-1">
           {model}
         </h1>
         <p className="text-muted-foreground text-sm">
-          Серийный номер: <span className="text-foreground font-medium">{serialNumber}</span>
+          S/N: <span className="text-foreground">{serialNumber}</span>
         </p>
       </motion.div>
 
-      {/* Product Image with Original Badge */}
+      {/* Product Image with Badge */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="relative max-w-sm mx-auto mb-6"
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="relative mb-6"
       >
         {/* Original Product Badge */}
         <div className="absolute top-3 left-3 z-10">
-          <div className="flex items-center gap-1.5 bg-success/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+          <div className="flex items-center gap-1.5 bg-success px-3 py-1.5 rounded-md">
             <CheckCircle className="w-3.5 h-3.5 text-white" />
-            <span className="text-xs font-medium text-white uppercase tracking-wide">
+            <span className="text-[11px] font-semibold text-white uppercase tracking-wider">
               Оригинальный товар
             </span>
           </div>
         </div>
 
-        <div className="aspect-square rounded-xl bg-background-secondary p-6 flex items-center justify-center">
+        <div className="aspect-square rounded-lg bg-surface p-6 flex items-center justify-center">
           <img
             src={imageUrl}
             alt={model}
@@ -68,26 +69,26 @@ export function ProductHero({
         </div>
       </motion.div>
 
-      {/* Action Buttons */}
+      {/* CTA Buttons - Reference style */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="space-y-3 max-w-sm mx-auto"
+        transition={{ duration: 0.4, delay: 0.2 }}
+        className="space-y-3"
       >
-        {/* Warranty Section */}
+        {/* Primary CTA - Warranty */}
         {warrantyRegistered ? (
-          <div className="glass-surface rounded-xl p-5 bg-success/5">
+          <div className="bg-surface rounded-lg p-4 border border-success/30">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center">
-                <Shield className="w-6 h-6 text-success" />
+              <div className="w-10 h-10 rounded-md bg-success/20 flex items-center justify-center">
+                <Shield className="w-5 h-5 text-success" />
               </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-success">
-                  Дополнительная гарантия активна
+              <div>
+                <p className="text-sm font-semibold text-success uppercase tracking-wide">
+                  Гарантия активна
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Действует до: {warrantyEndDate}
+                  Действует до {warrantyEndDate}
                 </p>
               </div>
             </div>
@@ -96,35 +97,37 @@ export function ProductHero({
           <div className="space-y-2">
             <Button
               onClick={onRegisterWarranty}
-              className="w-full h-14 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-primary-foreground font-semibold rounded-xl transition-smooth uppercase tracking-wider text-sm"
+              className="w-full h-12 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth"
             >
-              <Shield className="w-5 h-5 mr-3" />
-              Зарегистрировать гарантию
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              <span className="uppercase tracking-wide text-sm">
+                Зарегистрировать гарантию
+              </span>
             </Button>
             <p className="text-center text-xs text-muted-foreground">
-              Получите +1 год дополнительной гарантии бесплатно
+              +1 год дополнительной гарантии бесплатно
             </p>
           </div>
         )}
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-3 pt-2">
+        {/* Secondary Actions - Two columns */}
+        <div className="grid grid-cols-2 gap-3">
           <Button
             onClick={onDownloadManual}
             variant="outline"
-            className="h-12 bg-surface hover:bg-accent text-foreground rounded-xl transition-smooth group flex items-center justify-center gap-2"
+            className="h-12 bg-surface hover:bg-accent border-stroke text-foreground rounded-lg transition-smooth"
           >
-            <FileText className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-smooth" />
-            <span className="text-sm uppercase tracking-wide font-medium">Инструкция</span>
+            <FileText className="w-4 h-4 mr-2 text-muted-foreground" />
+            <span className="text-sm uppercase tracking-wide">Инструкция</span>
           </Button>
 
           <Button
             onClick={() => setShowDiagram(true)}
             variant="outline"
-            className="h-12 bg-surface hover:bg-accent text-foreground rounded-xl transition-smooth group flex items-center justify-center gap-2"
+            className="h-12 bg-surface hover:bg-accent border-stroke text-foreground rounded-lg transition-smooth"
           >
-            <Ruler className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-smooth" />
-            <span className="text-sm uppercase tracking-wide font-medium">Схема</span>
+            <Ruler className="w-4 h-4 mr-2 text-muted-foreground" />
+            <span className="text-sm uppercase tracking-wide">Схема</span>
           </Button>
         </div>
       </motion.div>
