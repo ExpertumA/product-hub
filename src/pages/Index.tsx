@@ -9,12 +9,12 @@ import { InstallationForm } from "@/components/InstallationForm";
 import { PromoBanner } from "@/components/PromoBanner";
 import { ServiceBlock } from "@/components/ServiceBlock";
 import { ErrorState } from "@/components/ErrorState";
-import ovenImage from "@/assets/oven-product.png";
+import ovenImage from "@/assets/hf-608-b-01.png";
 
 // Simulated QR data (in real app, would come from URL params)
 const MOCK_QR_DATA = {
-  model: "Kuppersberg High-Tech HT 612 BX",
-  serialNumber: "KP-2024-087542",
+  model: "HF 608 B",
+  serialNumber: "434501834",
   isValid: true,
 };
 
@@ -26,6 +26,7 @@ const getStoredWarranty = (serialNumber: string) => {
 
 const saveWarranty = (serialNumber: string, data: { purchaseDate: string; name: string; phone: string }) => {
   const endDate = new Date(data.purchaseDate);
+  // 2 года стандартная + 1 год дополнительно = 3 года всего
   endDate.setFullYear(endDate.getFullYear() + 3);
   
   const warrantyData = {

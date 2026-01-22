@@ -86,7 +86,7 @@ export function WarrantyForm({
                   <h2 className="font-display text-lg font-semibold">
                     Регистрация гарантии
                   </h2>
-                  <p className="text-xs text-muted-foreground">+3 года дополнительно</p>
+                  <p className="text-xs text-muted-foreground">+1 год дополнительно</p>
                 </div>
               </div>
               <button

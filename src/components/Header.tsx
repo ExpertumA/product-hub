@@ -1,4 +1,5 @@
 import { MapPin, ChevronDown } from "lucide-react";
+import logoSvg from "@/assets/kuppersberg-logo.svg";
 
 interface HeaderProps {
   city: string;
@@ -10,10 +11,12 @@ export function Header({ city, onChangeCity }: HeaderProps) {
     <header className="sticky top-0 z-40 glass-surface border-b border-divider">
       <div className="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <span className="font-display text-lg font-semibold text-primary tracking-wide">
-            KUPPERSBERG
-          </span>
+        <div className="flex items-center">
+          <img 
+            src={logoSvg} 
+            alt="Kuppersberg" 
+            className="h-4 w-auto"
+          />
         </div>
 
         {/* City Selector */}
