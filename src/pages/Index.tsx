@@ -42,6 +42,7 @@ const Index = () => {
   const [showInstallationForm, setShowInstallationForm] = useState(false);
   const [warrantyData, setWarrantyData] = useState<{
     endDate: string;
+    purchaseDate: string;
     name: string;
   } | null>(null);
 
@@ -59,6 +60,7 @@ const Index = () => {
       if (stored) {
         setWarrantyData({
           endDate: new Date(stored.endDate).toLocaleDateString("ru-RU"),
+          purchaseDate: new Date(stored.purchaseDate).toLocaleDateString("ru-RU"),
           name: stored.name,
         });
       }
@@ -80,6 +82,7 @@ const Index = () => {
     const saved = saveWarranty(MOCK_QR_DATA.serialNumber, data);
     setWarrantyData({
       endDate: new Date(saved.endDate).toLocaleDateString("ru-RU"),
+      purchaseDate: new Date(data.purchaseDate).toLocaleDateString("ru-RU"),
       name: saved.name,
     });
     setShowWarrantyForm(false);
@@ -140,6 +143,7 @@ const Index = () => {
                 onDownloadManual={handleDownloadManual}
                 isWarrantyRegistered={!!warrantyData}
                 warrantyEndDate={warrantyData?.endDate}
+                warrantyPurchaseDate={warrantyData?.purchaseDate}
               />
 
               <ServiceBlock
