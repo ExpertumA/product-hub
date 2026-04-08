@@ -60,6 +60,7 @@ const Index = () => {
       if (stored) {
         setWarrantyData({
           endDate: new Date(stored.endDate).toLocaleDateString("ru-RU"),
+          purchaseDate: new Date(stored.purchaseDate).toLocaleDateString("ru-RU"),
           name: stored.name,
         });
       }
