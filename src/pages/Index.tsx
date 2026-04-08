@@ -143,6 +143,7 @@ const Index = () => {
                 onDownloadManual={handleDownloadManual}
                 isWarrantyRegistered={!!warrantyData}
                 warrantyEndDate={warrantyData?.endDate}
+                warrantyPurchaseDate={warrantyData?.purchaseDate}
               />
 
               <ServiceBlock
