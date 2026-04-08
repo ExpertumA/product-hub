@@ -42,6 +42,7 @@ const Index = () => {
   const [showInstallationForm, setShowInstallationForm] = useState(false);
   const [warrantyData, setWarrantyData] = useState<{
     endDate: string;
+    purchaseDate: string;
     name: string;
   } | null>(null);
 
