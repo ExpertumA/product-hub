@@ -82,6 +82,7 @@ const Index = () => {
     const saved = saveWarranty(MOCK_QR_DATA.serialNumber, data);
     setWarrantyData({
       endDate: new Date(saved.endDate).toLocaleDateString("ru-RU"),
+      purchaseDate: new Date(data.purchaseDate).toLocaleDateString("ru-RU"),
       name: saved.name,
     });
     setShowWarrantyForm(false);
