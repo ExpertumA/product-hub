@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, ChevronRight, BadgeCheck, FileText, Ruler, Star } from "lucide-react";
+import { Shield, ChevronRight, BadgeCheck, FileText, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { InstallationDiagram } from "./InstallationDiagram";
