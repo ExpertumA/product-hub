@@ -36,13 +36,11 @@ export function WarrantyForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     try {
       warrantySchema.parse(formData);
       setIsSubmitting(true);
-      
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
       onSubmit(formData as { purchaseDate: string; name: string; phone: string });
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -66,116 +64,97 @@ export function WarrantyForm({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 backdrop-blur-sm p-4"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.98, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full max-w-md bg-surface rounded-lg border border-stroke shadow-deep overflow-hidden"
+            className="w-full max-w-md bg-surface rounded-2xl shadow-deep overflow-hidden"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-divider">
+            <div className="flex items-start justify-between p-6 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
+                <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
                   <Shield className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold uppercase tracking-wide">
+                  <h2 className="font-serif text-xl text-foreground leading-tight">
                     Регистрация гарантии
                   </h2>
-                  <p className="text-xs text-muted-foreground">+1 год дополнительно</p>
+                  <p className="text-xs text-primary mt-0.5">+1 год дополнительно</p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-accent transition-smooth"
+                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-background-secondary transition-smooth"
               >
                 <X className="w-4 h-4 text-muted-foreground" />
               </button>
             </div>
 
             {/* Pre-filled info */}
-            <div className="px-5 py-4 bg-background border-b border-divider">
+            <div className="mx-6 mb-5 px-4 py-3 bg-background-secondary rounded-lg">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="label-style mb-1">Модель</p>
-                  <p className="text-sm font-medium">{model}</p>
+                  <p className="text-sm font-semibold">{model}</p>
                 </div>
                 <div>
-                  <p className="label-style mb-1">Серийный номер</p>
-                  <p className="text-sm font-medium">{serialNumber}</p>
+                  <p className="label-style mb-1">S/N</p>
+                  <p className="text-sm font-semibold">{serialNumber}</p>
                 </div>
               </div>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="p-5 space-y-4">
-              {/* Purchase Date */}
-              <div>
-                <label className="label-style mb-2 flex items-center gap-2">
-                  <Calendar className="w-3 h-3" />
-                  Дата покупки
-                </label>
+            <form onSubmit={handleSubmit} className="px-6 pb-6 space-y-3">
+              <FormField
+                icon={<Calendar className="w-3.5 h-3.5" />}
+                label="Дата покупки"
+                error={errors.purchaseDate}
+              >
                 <input
                   type="date"
                   value={formData.purchaseDate}
-                  onChange={(e) =>
-                    setFormData({ ...formData, purchaseDate: e.target.value })
-                  }
-                  className="w-full px-4 py-3 bg-background rounded-md border border-stroke text-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
+                  onChange={(e) => setFormData({ ...formData, purchaseDate: e.target.value })}
+                  className="w-full px-4 pt-5 pb-2 bg-surface rounded-lg border border-stroke text-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
                 />
-                {errors.purchaseDate && (
-                  <p className="text-xs text-destructive mt-1">{errors.purchaseDate}</p>
-                )}
-              </div>
+              </FormField>
 
-              {/* Name */}
-              <div>
-                <label className="label-style mb-2 flex items-center gap-2">
-                  <User className="w-3 h-3" />
-                  Ваше имя
-                </label>
+              <FormField
+                icon={<User className="w-3.5 h-3.5" />}
+                label="Ваше имя"
+                error={errors.name}
+              >
                 <input
                   type="text"
-                  placeholder="Иван Иванов"
+                  placeholder=" "
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-4 py-3 bg-background rounded-md border border-stroke text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 pt-5 pb-2 bg-surface rounded-lg border border-stroke text-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
                 />
-                {errors.name && (
-                  <p className="text-xs text-destructive mt-1">{errors.name}</p>
-                )}
-              </div>
+              </FormField>
 
-              {/* Phone */}
-              <div>
-                <label className="label-style mb-2 flex items-center gap-2">
-                  <Phone className="w-3 h-3" />
-                  Телефон
-                </label>
+              <FormField
+                icon={<Phone className="w-3.5 h-3.5" />}
+                label="Телефон"
+                error={errors.phone}
+              >
                 <input
                   type="tel"
-                  placeholder="+7 (999) 123-45-67"
+                  placeholder=" "
                   value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className="w-full px-4 py-3 bg-background rounded-md border border-stroke text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 pt-5 pb-2 bg-surface rounded-lg border border-stroke text-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
                 />
-                {errors.phone && (
-                  <p className="text-xs text-destructive mt-1">{errors.phone}</p>
-                )}
-              </div>
+              </FormField>
 
-              {/* Submit */}
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 mt-2 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth disabled:opacity-70"
+                className="w-full h-12 mt-4 bg-cta hover:bg-cta-hover text-cta-foreground font-medium rounded-xl transition-smooth disabled:opacity-70"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -184,12 +163,12 @@ export function WarrantyForm({
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                       className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
                     />
-                    <span className="uppercase tracking-wide text-sm">Отправка...</span>
+                    <span className="text-sm">Отправка...</span>
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
                     <Check className="w-4 h-4" />
-                    <span className="uppercase tracking-wide text-sm">Зарегистрировать</span>
+                    <span className="text-sm">Зарегистрировать</span>
                   </span>
                 )}
               </Button>
@@ -198,5 +177,30 @@ export function WarrantyForm({
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function FormField({
+  icon,
+  label,
+  error,
+  children,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <div className="relative">
+        <label className="absolute left-4 top-1.5 text-[10px] uppercase tracking-wider text-primary font-medium flex items-center gap-1 z-10 pointer-events-none">
+          {icon}
+          {label}
+        </label>
+        {children}
+      </div>
+      {error && <p className="text-xs text-destructive mt-1 ml-1">{error}</p>}
+    </div>
   );
 }
