@@ -4,18 +4,9 @@ import { MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CITIES = [
-  "Москва",
-  "Санкт-Петербург",
-  "Новосибирск",
-  "Екатеринбург",
-  "Казань",
-  "Нижний Новгород",
-  "Челябинск",
-  "Самара",
-  "Омск",
-  "Ростов-на-Дону",
-  "Уфа",
-  "Красноярск",
+  "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
+  "Казань", "Нижний Новгород", "Челябинск", "Самара",
+  "Омск", "Ростов-на-Дону", "Уфа", "Красноярск",
 ];
 
 interface CitySelectModalProps {
@@ -32,9 +23,7 @@ export function CitySelectModal({ isOpen, onSelect }: CitySelectModalProps) {
   );
 
   const handleConfirm = () => {
-    if (selected) {
-      onSelect(selected);
-    }
+    if (selected) onSelect(selected);
   };
 
   return (
@@ -44,26 +33,26 @@ export function CitySelectModal({ isOpen, onSelect }: CitySelectModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 backdrop-blur-sm p-4"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.98, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full max-w-md mx-4 bg-surface rounded-lg border border-stroke shadow-deep overflow-hidden"
+            className="w-full max-w-md bg-surface rounded-2xl shadow-deep overflow-hidden"
           >
             {/* Header */}
-            <div className="p-5 border-b border-divider">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
+            <div className="p-6 pb-4">
+              <div className="flex items-center gap-3 mb-1">
+                <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold uppercase tracking-wide">
+                  <h2 className="font-serif text-xl text-foreground leading-tight">
                     Выберите город
                   </h2>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     Для отображения сервисных центров
                   </p>
                 </div>
@@ -71,7 +60,7 @@ export function CitySelectModal({ isOpen, onSelect }: CitySelectModalProps) {
             </div>
 
             {/* Search */}
-            <div className="px-5 py-4">
+            <div className="px-6 pb-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
@@ -79,22 +68,22 @@ export function CitySelectModal({ isOpen, onSelect }: CitySelectModalProps) {
                   placeholder="Поиск города..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-background rounded-md border border-stroke text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-smooth text-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-background-secondary rounded-lg border border-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:bg-surface transition-smooth text-sm"
                 />
               </div>
             </div>
 
             {/* City List */}
-            <div className="px-5 max-h-64 overflow-y-auto">
+            <div className="px-6 max-h-64 overflow-y-auto">
               <div className="grid grid-cols-2 gap-2 pb-4">
                 {filteredCities.map((city) => (
                   <button
                     key={city}
                     onClick={() => setSelected(city)}
-                    className={`px-4 py-3 rounded-md text-left text-sm transition-smooth ${
+                    className={`px-4 py-3 rounded-lg text-left text-sm transition-smooth ${
                       selected === city
-                        ? "bg-primary text-white font-medium"
-                        : "bg-background hover:bg-accent text-foreground"
+                        ? "bg-primary text-primary-foreground font-medium"
+                        : "bg-background-secondary hover:bg-background hover:text-primary text-foreground"
                     }`}
                   >
                     {city}
@@ -104,13 +93,13 @@ export function CitySelectModal({ isOpen, onSelect }: CitySelectModalProps) {
             </div>
 
             {/* Footer */}
-            <div className="p-5 border-t border-divider">
+            <div className="p-6 pt-2">
               <Button
                 onClick={handleConfirm}
                 disabled={!selected}
-                className="w-full h-12 bg-primary hover:bg-primary-hover active:bg-primary-pressed text-white font-medium rounded-lg transition-smooth disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full h-12 bg-cta hover:bg-cta-hover text-cta-foreground font-medium rounded-xl transition-smooth disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                <span className="uppercase tracking-wide text-sm">Подтвердить</span>
+                <span className="text-sm">Подтвердить</span>
               </Button>
             </div>
           </motion.div>

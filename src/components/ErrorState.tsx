@@ -17,23 +17,21 @@ const SERVICE_CENTERS = [
 export function ErrorState({ onContactSupport, city, onChangeCity }: ErrorStateProps) {
   return (
     <div className="min-h-screen bg-background">
-      {city && onChangeCity && (
-        <Header city={city} onChangeCity={onChangeCity} />
-      )}
-      
+      {city && onChangeCity && <Header city={city} onChangeCity={onChangeCity} />}
+
       <main className="max-w-md mx-auto px-4 pb-8">
-        {/* Error Message Block */}
+        {/* Error Card */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="py-8"
         >
-          <div className="bg-surface rounded-lg p-6 border border-stroke text-center">
-            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-              <AlertTriangle className="w-7 h-7 text-primary" />
+          <div className="bg-surface rounded-2xl p-7 shadow-soft text-center">
+            <div className="w-16 h-16 rounded-full bg-warning/10 flex items-center justify-center mx-auto mb-5">
+              <AlertTriangle className="w-7 h-7 text-warning" />
             </div>
-            <h1 className="text-lg font-bold uppercase tracking-wide mb-3">
+            <h1 className="font-serif text-2xl text-foreground mb-3 leading-tight">
               Устройство не найдено
             </h1>
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
@@ -41,27 +39,24 @@ export function ErrorState({ onContactSupport, city, onChangeCity }: ErrorStateP
             </p>
             <Button
               onClick={onContactSupport}
-              className="w-full h-12 bg-[#2AABEE] hover:bg-[#229ED9] text-white font-medium rounded-lg transition-smooth"
+              className="w-full h-12 bg-cta hover:bg-cta-hover text-cta-foreground font-medium rounded-xl transition-smooth"
             >
               <Send className="w-4 h-4 mr-2" />
-              <span className="uppercase tracking-wide text-sm">
-                Отправить чек
-              </span>
+              <span className="text-sm">Отправить чек</span>
             </Button>
           </div>
         </motion.div>
 
-        {/* Service and Support Block */}
+        {/* Service & Support */}
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <h2 className="text-lg font-bold uppercase tracking-wide mb-4">
+          <h2 className="font-serif text-2xl text-foreground mb-5">
             Сервис и поддержка
           </h2>
 
-          {/* Service Centers */}
           <div className="mb-6">
             <p className="label-style mb-3 flex items-center gap-2">
               <MapPin className="w-3 h-3" />
@@ -71,15 +66,15 @@ export function ErrorState({ onContactSupport, city, onChangeCity }: ErrorStateP
               {SERVICE_CENTERS.map((center, index) => (
                 <div
                   key={index}
-                  className="bg-surface rounded-lg p-4 border border-stroke flex items-start justify-between"
+                  className="bg-surface rounded-xl p-4 shadow-soft flex items-start justify-between"
                 >
                   <div>
-                    <p className="text-sm font-medium">{center.name}</p>
+                    <p className="text-sm font-semibold text-foreground">{center.name}</p>
                     <p className="text-xs text-muted-foreground mt-1">{center.address}</p>
                   </div>
                   <a
                     href={`tel:${center.phone.replace(/\D/g, "")}`}
-                    className="flex items-center gap-1.5 text-primary hover:text-primary-hover transition-smooth"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
                   >
                     <Phone className="w-4 h-4" />
                   </a>
@@ -92,8 +87,8 @@ export function ErrorState({ onContactSupport, city, onChangeCity }: ErrorStateP
         {/* Footer */}
         <footer className="border-t border-divider py-6 mt-8">
           <div className="text-center">
-            <p className="text-primary text-xs font-bold tracking-widest uppercase mb-2">
-              KUPPERSBERG
+            <p className="font-serif italic text-base text-foreground mb-2">
+              Kuppersberg
             </p>
             <p className="text-xs text-muted-foreground">
               © 2024 Kuppersberg. Все права защищены.

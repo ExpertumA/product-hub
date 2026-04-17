@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Download, ZoomIn } from "lucide-react";
+import { X, Download, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import diagramImage from "@/assets/installation-diagram.jpg";
 
@@ -9,11 +9,7 @@ interface InstallationDiagramProps {
   model: string;
 }
 
-export function InstallationDiagram({
-  isOpen,
-  onClose,
-  model,
-}: InstallationDiagramProps) {
+export function InstallationDiagram({ isOpen, onClose, model }: InstallationDiagramProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -21,7 +17,7 @@ export function InstallationDiagram({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 backdrop-blur-sm p-4"
           onClick={onClose}
         >
           <motion.div
@@ -29,33 +25,31 @@ export function InstallationDiagram({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full max-w-lg bg-surface rounded-lg border border-stroke shadow-deep overflow-hidden"
+            className="w-full max-w-lg bg-surface rounded-2xl shadow-deep overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-divider">
+            <div className="flex items-start justify-between p-6 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
-                  <ZoomIn className="w-5 h-5 text-primary" />
+                <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Ruler className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold uppercase tracking-wide">
+                  <h2 className="font-serif text-xl text-foreground leading-tight">
                     Схема встраивания
                   </h2>
-                  <p className="text-xs text-muted-foreground">{model}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{model}</p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-accent transition-smooth"
+                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-background-secondary transition-smooth"
               >
                 <X className="w-4 h-4 text-muted-foreground" />
               </button>
             </div>
 
-            {/* Diagram Image */}
-            <div className="p-4">
-              <div className="rounded-md overflow-hidden bg-white">
+            <div className="px-6">
+              <div className="rounded-xl overflow-hidden bg-background-secondary p-4">
                 <img
                   src={diagramImage}
                   alt={`Схема встраивания ${model}`}
@@ -64,8 +58,7 @@ export function InstallationDiagram({
               </div>
             </div>
 
-            {/* Actions */}
-            <div className="px-5 pb-5">
+            <div className="p-6">
               <Button
                 onClick={() => {
                   const link = document.createElement("a");
@@ -73,11 +66,10 @@ export function InstallationDiagram({
                   link.download = `schema-${model.replace(/\s+/g, "-")}.jpg`;
                   link.click();
                 }}
-                variant="outline"
-                className="w-full h-12 bg-surface hover:bg-accent border-stroke text-foreground rounded-lg transition-smooth"
+                className="w-full h-12 bg-cta hover:bg-cta-hover text-cta-foreground rounded-xl transition-smooth"
               >
                 <Download className="w-4 h-4 mr-2" />
-                <span className="uppercase tracking-wide text-sm">Скачать схему</span>
+                <span className="text-sm">Скачать схему</span>
               </Button>
             </div>
           </motion.div>
