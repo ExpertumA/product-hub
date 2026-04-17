@@ -28,13 +28,42 @@ export function ProductHero({
 
   return (
     <section className="py-6">
-      {/* Breadcrumbs */}
+      {/* Product Title */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="flex items-center gap-2 text-xs text-muted-foreground mb-5"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="mb-2"
       >
+        <h1 className="font-serif text-3xl text-foreground leading-tight mb-3">
+          Духовой шкаф {model}
+        </h1>
+        <p className="text-xs text-muted-foreground">
+          S/N: <span className="text-foreground font-medium">{serialNumber}</span>
+        </p>
+      </motion.div>
+
+      {/* Product Image */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="relative mb-6 mt-5"
+      >
+        <div className="aspect-square rounded-xl bg-background-secondary p-8 flex items-center justify-center">
+          <img
+            src={ovenImage}
+            alt={model}
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-full shadow-soft">
+          <BadgeCheck className="w-3 h-3 text-primary" />
+          <span className="text-[10px] font-medium uppercase tracking-wider text-foreground">
+            Оригинал
+          </span>
+        </div>
+      </motion.div>
         <span>Главная</span>
         <span className="text-primary">•</span>
         <span>Духовые шкафы</span>
