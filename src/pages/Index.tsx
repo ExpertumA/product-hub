@@ -151,8 +151,8 @@ const Index = () => {
             {/* Footer */}
             <footer className="border-t border-divider py-6">
               <div className="max-w-md mx-auto px-4 text-center">
-                <p className="text-primary text-xs font-bold tracking-widest uppercase mb-2">
-                  KUPPERSBERG
+                <p className="font-serif italic text-base text-foreground mb-2">
+                  Kuppersberg
                 </p>
                 <p className="text-xs text-muted-foreground">
                   © 2024 Kuppersberg. Все права защищены.
