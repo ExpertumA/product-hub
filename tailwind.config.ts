@@ -16,6 +16,10 @@ export default {
       fontFamily: {
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
+      fontFamily: {
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        serif: ["Playfair Display", "Georgia", "serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -30,6 +34,11 @@ export default {
           hover: "hsl(var(--primary-hover))",
           pressed: "hsl(var(--primary-pressed))",
           foreground: "hsl(var(--primary-foreground))",
+        },
+        cta: {
+          DEFAULT: "hsl(var(--cta))",
+          hover: "hsl(var(--cta-hover))",
+          foreground: "hsl(var(--cta-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
